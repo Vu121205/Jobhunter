@@ -33,18 +33,9 @@ public class FormatRestResponse implements ResponseBodyAdvice<Object> {
         RestResponse<Object> res = new RestResponse<Object>();
         res.setStatusCode(status);
 
-        if(body instanceof RestResponse) {
-            //case da duoc format
+        if (status >= 400) {
             return body;
-        }
-
-        if(status >= 400) {
-            //case error
-            return body;
-
-        }else
-        {
-            //case success
+        } else {
             res.setData(body);
             res.setMessage("CALL API SUCCESS");
         }
